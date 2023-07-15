@@ -1,0 +1,64 @@
+[{
+    "id":1,
+    "label":"Saque",
+    "value":300.99,
+    "date":"11/06/23",
+    "type": 0
+},
+{
+    "id":2,
+    "label":"Depositor",
+    "value":1200.99,
+    "date":"11/06/23",
+    "type": 1
+},
+{
+    "id":3,
+    "label":"Depositor",
+    "value":20.00,
+    "date":"14/06/23",
+    "type": 1
+},
+{
+    "id":4,
+    "label":"Saque",
+    "value":139.00,
+    "date":"14/06/23",
+    "type": 0
+},
+{
+    "id":5,
+    "label":"Saque",
+    "value":1200.00,
+    "date":"14/06/23",
+    "type": 0
+},
+{
+    "id":6,
+    "label":"Saque",
+    "value":700.99,
+    "date":"11/06/23",
+    "type": 0
+},
+{
+    "id":7,
+    "label":"Depositor",
+    "value":1200.99,
+    "date":"11/06/23",
+    "type": 1
+},
+{
+    "id":8,
+    "label":"Saque",
+    "value":700.99,
+    "date":"11/06/23",
+    "type": 0
+},
+{
+    "id":9,
+    "label":"Depositor",
+    "value":1200.99,
+    "date":"11/06/23",
+    "type": 1
+}
+]
