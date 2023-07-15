@@ -136,6 +136,25 @@ app.put('/uptade/user/:id', async (req,res) => {
       res.status(500).json({ error: 'Erro ao atualizar os dados' });
     }
 })
+app.delete('/deleteUSer/:id', eAdmin, async (req,res) => {
+    try {
+        const id = req.params.id
+
+        await User.destroy({
+             where: {
+                id:id
+             } 
+            })
+        await Moviments.destroy({
+             where: { id:id } 
+            })
+
+        res.status(200).json({messagem:'conta apagada com sucesso!'})
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({messagem: "Ocorreu um erro ao apagar a conta"})
+    }
+})
 
 
 app.post('/cadastrarMoviments', async (req, res) => {
