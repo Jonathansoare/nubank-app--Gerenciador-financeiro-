@@ -29,7 +29,7 @@ export default function Home() {
       const ganhos = res.result.ganhos
       setGanhos((ganhos).toFixed(2));
     } catch (error) {
-      console.log("ERRO:", error);
+      console.log("ERRO EM CALCULAR ENTRADA:", error);
     }
   }
 
@@ -63,7 +63,7 @@ export default function Home() {
       const despesas = res.result.despesas
       setDespesas((despesas).toFixed(2));
     } catch (error) {
-      console.log("ERRO:", error);
+      console.log("ERRO EM CALCULAR SAIDA:", error);
     }
   }  
 
