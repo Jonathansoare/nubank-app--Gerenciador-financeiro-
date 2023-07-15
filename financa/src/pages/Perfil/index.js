@@ -6,16 +6,21 @@ import { View,Text,
     from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import DeleteUserModal from '../../components/Modal/DeleteUserModal';
+import ConfirmDeleteUserModal from '../../components/Modal/ConfirmDeleteUser';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
 import api from '../../assets/api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from "@react-navigation/native";
 
 export default function Perfil() {
+    const navigation = useNavigation()
     AsyncStorage.getItem('tokenUser').then((res) => setToken(res))
     AsyncStorage.getItem('IdUser').then((res) => setId(res))
     const [isModalVisible,setisModalVisible] = useState(false);
+    const [isModalConfirDelete,setIsConfirmDelete] = useState(false)
     const [chooseData,setChooseData] = useState()
+    const [chooseDataDelete,setChooseDataDelete] = useState()
     const [isLoading,setIsLoading] = useState(false)
     const [id,setId] = useState()
     const [token,setToken] = useState()
@@ -28,16 +33,29 @@ export default function Perfil() {
     const changeModalVisible = (bool) => {
         setisModalVisible(bool)
     }
+    const changeModalConfirDelete = (bool) => {
+        setIsConfirmDelete(bool)
+    }
 
-    const setData = (data) => {
+    const setData = (data) => { 
         setChooseData(data)
         if(data === "delete"){
             setIsLoading(true)
             setTimeout(() => {
-                console.log("APAGANDO CONTA...");
                 setIsLoading(false)
                 setisModalVisible(false)
+                changeModalConfirDelete(true)
+                deleteUser()
             },2000)
+        }
+    }
+    const setDataConfirDelete = (data) => {
+        setChooseDataDelete(data)
+        if(data === "back"){
+            setIsLoading(true)
+            setTimeout(() => {
+                navigation.replace("Login")
+            }, 1000);
         }
     }
 
@@ -53,6 +71,17 @@ export default function Perfil() {
             setIsLoading(false)
         }).catch(erro => {
             console.log("ERRO EM PEGAR OS DADOS DO USUARIO: "+erro);
+        })
+    }
+
+    async function deleteUser(){
+        const res = await axios.delete(`${api}/deleteUSer/${id}`,{
+            headers: { 'Authorization': `Bearer ${token}`}
+        })
+        .then((res) => {
+            console.log(res.data);
+        }).catch((erro) => {
+            console.log("ERROR EM APAGAR CONTA DO USUARIO: "+erro);
         })
     }
 
@@ -130,6 +159,17 @@ export default function Perfil() {
             >
                 <DeleteUserModal changeModalVisible={changeModalVisible}
                 setData={setData}/>
+            </Modal>
+            <Modal 
+                transparent={true}
+                animationType='fade'
+                visible={isModalConfirDelete}
+                nRequestClose={() => changeModalConfirDelete(false)}
+            >
+            <ConfirmDeleteUserModal 
+            changeModalVisible={changeModalConfirDelete} 
+            setData={setDataConfirDelete} 
+            msg="Conta deletada com sucesso"/>
             </Modal>
         </View>
    </SafeAreaView>
