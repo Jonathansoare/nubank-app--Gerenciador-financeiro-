@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View,Text,
     TextInput,StyleSheet,
     SafeAreaView, TouchableOpacity,
-    Modal }
+    Modal,Dimensions }
     from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import DeleteUserModal from '../../components/Modal/DeleteUserModal';
@@ -12,6 +12,9 @@ import axios from 'axios';
 import api from '../../assets/api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
+
+const {width,height} = Dimensions.get("window")
+
 
 export default function Perfil() {
     const navigation = useNavigation()
@@ -106,7 +109,15 @@ export default function Perfil() {
             setMsgErro()
         }, 2500);
     })
-      }
+    }
+
+    async function logout(){
+        setIsLoading(true)
+        setTimeout(() => {
+            navigation.replace("Login")
+            setIsLoading(false)
+        }, 1000);
+    }
 
     useEffect(() => {
         getUser()
@@ -147,6 +158,10 @@ export default function Perfil() {
                     <Text style={styles.textButtonSave}>Salva</Text>
                 </TouchableOpacity>
 
+                <TouchableOpacity style={styles.buttonLogout} onPress={() => logout()}>
+                    <Text style={styles.textButtonSave}>Logout</Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity style={styles.buttonDeleteUser} onPress={() => setisModalVisible(true)}>
                     <Text style={styles.textButtonDeleteUser}>Apagar perfil</Text>
                 </TouchableOpacity>
@@ -180,15 +195,16 @@ export default function Perfil() {
 const styles = StyleSheet.create({
     container:{
         backgroundColor:"#FFF",
-        flex:1
+        width: width,
+        height:height
     },
     content:{
         backgroundColor:"#820ad1",
-        flex:1,
-        marginTop:250,
+        height:height,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
         paddingTop:20,
+        marginTop:200
     },
     containerUser:{
         width:150,
@@ -259,7 +275,7 @@ const styles = StyleSheet.create({
         backgroundColor:"red",
         width:'90%',
         alignSelf:"center",
-        marginTop:30,
+        marginTop:20,
         height:40,
         alignItems:"center",
         justifyContent:"center",
@@ -269,8 +285,18 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:"white"
     },
+    buttonLogout:{
+        backgroundColor:"white",
+        width:'90%',
+        alignSelf:"center",
+        height:40,
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:20,
+        marginTop:20
+    },
     contentButton:{
-        marginTop:50
+        marginTop:30
     },
     msgErro:{
         color:"red",
