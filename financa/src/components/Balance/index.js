@@ -1,6 +1,12 @@
 import React,{useState} from 'react';
 import { View,Text,StyleSheet, TouchableOpacity } from 'react-native';
 
+import {useFonts,Roboto_400Regular,
+    Roboto_300Light_Italic,
+    Roboto_400Regular_Italic,
+    Roboto_100Thin_Italic,
+  } from "@expo-google-fonts/roboto"
+
 export default function Balance({saldo,gastos,showVisible}) {
  return (
     <>
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
     },
     balance:{
         fontSize:22,
-        color:"green"
+        color:"green",
     },
     expense:{
         fontSize:22,

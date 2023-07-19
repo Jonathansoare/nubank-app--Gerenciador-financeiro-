@@ -1,21 +1,34 @@
 import React, { useState } from 'react';
-import { View,Text,StyleSheet,StatusBar,TouchableOpacity } from 'react-native';
+import { View,Text,StyleSheet,StatusBar,TouchableOpacity,Animated } from 'react-native';
 import {Feather} from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native";
+
+import {
+    useFonts,Roboto_400Regular,
+    Roboto_300Light_Italic,
+    Roboto_400Regular_Italic,
+    Roboto_100Thin_Italic,
+    Roboto_900Black
+  } from "@expo-google-fonts/roboto"
+  import {
+    Poppins_100Thin
+  } from "@expo-google-fonts/poppins"
 
 const statusBarHeigth = StatusBar.currentHeigh ? StatusBar.currentHeight + 22 : 64; 
 
 export default function Header({saldo,ToggleShowVisible,showVisible}) {
     const [showValue,setShowValue] = useState(false)
     const navigation = useNavigation()
+    const [opacityAnimation,setOpacityAnimation] = useState(new Animated.Value(1))
 
+   
  return (
    <View style={styles.container}>
     <View style={styles.content}>
         <View>
             <Text style={styles.textBalenceTitle}>Saldo</Text>
             {showVisible ? <>
-            <Text style={saldo < 0 ? styles.espense : styles.textBalence }>{saldo === "NaN" ? "R$0,00" : `R$${saldo}`}</Text>
+            <Text style={saldo < 0 ? styles.espense : styles.textBalence}>{saldo === "NaN" ? "R$0,00" : `R$${saldo}`}</Text>
             </> : <View style={styles.skeleton}/>}
         </View>
         <TouchableOpacity style={{marginLeft:'-45%'}} onPress={ToggleShowVisible}>
@@ -65,8 +78,9 @@ const styles = StyleSheet.create({
         position:"relative"
     },
     textBalenceTitle:{
-        fontSize:20,
+        fontSize:24,
         color:"#fff",
+        letterSpacing:2,
     },
     espense:{
         fontSize:32,

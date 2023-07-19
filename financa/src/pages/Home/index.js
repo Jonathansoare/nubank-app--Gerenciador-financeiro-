@@ -1,16 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View,FlatList,SafeAreaView,RefreshControl } from 'react-native';
+import { StyleSheet, Text, View,FlatList,SafeAreaView,RefreshControl,Animated } from 'react-native';
 import Header from '../../components/Header';
 import Balance from '../../components/Balance';
 import Moviments from '../../components/Moviments';
 import Actions from '../../components/Actions';
-import db from  '../../../db.json'
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import api from '../../assets/api/api';
 import Spinner from 'react-native-loading-spinner-overlay';
-
 
 export default function Home() {
   AsyncStorage.getItem('IdUser').then((res) => setId(res))

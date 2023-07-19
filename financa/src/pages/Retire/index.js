@@ -1,14 +1,12 @@
 import React, { useState,useEffect } from 'react';
 import { View,Text,StyleSheet,TouchableOpacity,Keyboard,ActivityIndicator,Modal,TextInput } from 'react-native';
 import { AntDesign } from "@expo/vector-icons"
-import db from '../../../db.json'
 import axios from 'axios';
 import api from '../../assets/api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from "@react-navigation/native";
 import ConfirmMovimentsModal from '../../components/Modal/ConfirmMoviment';
 
-const dados = db
 
 export default function Retire() {
   AsyncStorage.getItem('IdUser').then((res) => setId(res))

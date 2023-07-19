@@ -1,12 +1,18 @@
-import { useState } from 'react';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { AntDesign } from "@expo/vector-icons"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
+import Details from '../../pages/Details';
 
 export default function Moviments({data,showValue}) {
+    const navigation = useNavigation()
+
+    const abrirDetalhesMovimentacao = (movimentacao) => {
+        <Details data={data}/>
+      };
+
  return (
-   <TouchableOpacity style={styles.container} onPress={() => console.log("Movimentação")}>
+   <TouchableOpacity style={styles.container}>
     <Text style={styles.date}>{data.data}</Text>
 
          <View style={styles.content}>
