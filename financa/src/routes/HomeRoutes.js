@@ -6,6 +6,7 @@ import Home from '../pages/Home/index';
 import Deposit from '../pages/Deposit/index';
 import Retire from '../pages/Retire';
 import Perfil from '../pages/Perfil';
+import Details from '../pages/Details';
 
 const Stack = createNativeStackNavigator()
 
@@ -26,6 +27,12 @@ function HomeRoutes(){
             headerStyle:{backgroundColor:"#fff"},
             }} />
         <Stack.Screen name="Perfil" component={Perfil} options={
+            {headerShown:true,
+            headerShadowVisible:false,
+            title:"",
+            headerStyle:{backgroundColor:"#fff"},
+            }} />
+        <Stack.Screen name="Details" component={Details} options={
             {headerShown:true,
             headerShadowVisible:false,
             title:"",
