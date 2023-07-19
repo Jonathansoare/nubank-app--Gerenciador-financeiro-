@@ -240,4 +240,4 @@ app.get('/getSumMoviments/:id', async (req,res) => {
     }
 })
 
-app.listen(3001,'192.168.1.45', ()=>{console.log("Serve rodando na porta 3001.")})
+app.listen(3001,'192.168.0.5', ()=>{console.log("Serve rodando na porta 3001.")})
